@@ -1,0 +1,15 @@
+Source: debtest
+Section: contrib/python
+Priority: extra
+Maintainer: Felix Ingram <felix.ingram@nccgroup.com>
+Build-Depends: debhelper (>= 9), tar, dh-sequence-single-binary
+Standards-Version: 3.9.5
+Homepage: https://github.com/lllama/debtest
+
+Package: debtest
+Architecture: any
+Pre-Depends: dpkg (>= 1.16.1), postgresql, libpq-dev, ${misc:Pre-Depends}
+Depends: ${python:Depends}, ${misc:Depends}, dbconfig-pgsql | dbconfig-no-thanks
+Description: Deb test
+    .
+    This is a test package for trying to get dbconfig-common to install without user interaction.

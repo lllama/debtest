@@ -1,0 +1,47 @@
+-- Our schema file - gets run by dbconfig-common
+-- name: create_schema#
+create table if not exists users (
+    sso_federation_id uuid not null primary key,
+    display_name text not null,
+    email text not null
+);
+
+alter table users owner to debtest;
+
+create table if not exists sessions (
+    id uuid not null primary key,
+    last_seen timestamp default current_timestamp,
+    user_id uuid,
+    constraint fk_user foreign key (user_id) references users (sso_federation_id)
+);
+
+alter table users owner to debtest;
+
+create table if not exists mailboxes (
+    name text not null primary key,
+    owner uuid,
+    constraint fk_owner foreign key (owner) references users (sso_federation_id)
+);
+
+alter table mailboxes owner to debtest;
+
+create table if not exists access_requests (
+    requested_by uuid not null,
+    requested_to uuid not null,
+    mailbox_id text not null,
+    granted boolean,
+    primary key (requested_by, mailbox_id),
+    constraint fk_requested_by foreign key (requested_by) references users (sso_federation_id),
+    constraint fk_requested_to foreign key (requested_to) references users (sso_federation_id),
+    constraint fk_mailboxes foreign key (mailbox_id) references mailboxes (name)
+);
+
+alter table access_requests owner to debtest;
+
+create table if not exists reenabled_addresses (
+    domain text primary key,
+    expires date not null
+);
+
+alter table reenabled_addresses owner to debtest;
+

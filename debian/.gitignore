@@ -1,0 +1,6 @@
+ptm.*.debhelper
+ptm.substvars
+ptm/
+ptm-*/
+files
+debhelper-build-stamp

@@ -1,0 +1,6 @@
+debtest (0.1.0) focal; urgency=low
+
+  [ Felix Ingram ]
+  * debtest: Initial debian packaging
+
+ -- Ubuntu <ubuntu@debtest>  Wed, 29 Jun 2022 11:39:39 +0100

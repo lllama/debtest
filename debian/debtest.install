@@ -1,0 +1,2 @@
+database/pgsql usr/share/dbconfig-common/data/debtest/install
+# debian/debtest.conf etc/dbconfig-common
